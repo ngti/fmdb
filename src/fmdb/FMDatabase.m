@@ -538,13 +538,14 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
     
     // FIXME - someday check the return codes on these binds.
     else if ([obj isKindOfClass:[NSData class]]) {
-        const void *bytes = [obj bytes];
+        NSData *dataObj = (NSData *)obj;
+        const void *bytes = [dataObj bytes];
         if (!bytes) {
             // it's an empty NSData object, aka [NSData data].
             // Don't pass a NULL pointer, or sqlite will bind a SQL null instead of a blob.
             bytes = "";
         }
-        sqlite3_bind_blob(pStmt, idx, bytes, (int)[obj length], SQLITE_STATIC);
+        sqlite3_bind_blob(pStmt, idx, bytes, (int)[dataObj length], SQLITE_STATIC);
     }
     else if ([obj isKindOfClass:[NSDate class]]) {
         if (self.hasDateFormatter)
