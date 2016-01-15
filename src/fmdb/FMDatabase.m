@@ -806,7 +806,7 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
                 // increment the binding count, so our check below works out
                 idx++;
             }
-            else {
+            else if (_traceExecution) {
                 NSLog(@"Could not find index for %@", dictionaryKey);
             }
         }
@@ -988,7 +988,7 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
                 // increment the binding count, so our check below works out
                 idx++;
             }
-            else {
+            else if (_traceExecution) {
                 NSLog(@"Could not find index for %@", dictionaryKey);
             }
         }
